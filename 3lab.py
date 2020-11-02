@@ -31,23 +31,19 @@ class Сlient:
         self.deposit_amount = deposit_amount  #желаемая сумма вклада
         self.lasting = lasting                #желаемая длительность вклада в месяцах
 
-def change_lasting():                         #метод класса смена желаемой длительности вклада
-    print('Введите другую длительность вклада в месяцах:')
-    client.deposit_amount = int(input())
+    def change_lasting():                         #метод класса смена желаемой длительности вклада
+        print('Введите другую длительность вклада в месяцах:')
+        client.deposit_amount = int(input())
 
 
-def Writer_Client_csv():
-    myData = [["name", "deposit_amount", "lasting"],
-          [client.name, client.deposit_amount, client.lasting]]
-          
- 
-    myFile = open('C:\\Users\\AAZhirova\\first_project\\2.csv', 'w')
-    with myFile:
-        writer = csv.writer(myFile, delimiter=';')
-        writer.writerows(myData)
-     
-    print("Запись прошла успешно!")
-
+    def Writer_Client_csv():
+        myData = [["name", "deposit_amount", "lasting"],
+            [client.name, client.deposit_amount, client.lasting]]
+        myFile = open('C:\\Users\\AAZhirova\\first_project\\2.csv', 'w')
+        with myFile:
+            writer = csv.writer(myFile, delimiter=';')
+            writer.writerows(myData)
+        print("Запись прошла успешно!")
 
 print('Введите Ваше имя и фамилию, желаемую сумма вклада, желаемую длительность вклада в месяцах:')
 
