@@ -33,13 +33,24 @@ conn = sqlite3.connect("C:\\Users\\AAZhirova\\first_project\\database.db")
 cursor = conn.cursor()
 
 # Вставляем данные в таблицу
-cursor.execute("""INSERT INTO deposit
-                  VALUES ('5', 'ВТБ', '5', '1000', '2000000', '24')"""
-               )
- 
+#cursor.execute("""INSERT INTO deposit
+#                  VALUES ('6', 'ВТБ', '5', '1000', '2000000', '24')"""
+#               )
 # Сохраняем изменения
-conn.commit()
+#conn.commit()
  
+# Удаление из таблицы строки , где id депозита = 5
+sql = "DELETE FROM deposit WHERE deposit_id = '5'"
+cursor.execute(sql)
+conn.commit()
+
+# Вставляем множество данных в таблицу используя безопасный метод "?"
+deposit = [('5', 'Тинькофф', '6', '10', '1000000', '12'),
+          ('6', 'Росбанк', '5', '10000', '1000000', '24')
+         ]
+ 
+cursor.executemany("INSERT INTO deposit VALUES (?,?,?,?,?,?)", deposit)
+conn.commit()
 
 
 class Сlient:
@@ -48,12 +59,12 @@ class Сlient:
         self.deposit_amount = deposit_amount  #желаемая сумма вклада
         self.lasting = lasting                #желаемая длительность вклада в месяцах
 
-    def change_lasting():                         #метод класса смена желаемой длительности вклада
+    def change_lasting(self):                         #метод класса смена желаемой длительности вклада
         print('Введите другую длительность вклада в месяцах:')
         client.deposit_amount = int(input())
 
 
-    def Writer_Client_csv():
+    def Writer_Client_csv(self):
         myData = [["name", "deposit_amount", "lasting"],
             [client.name, client.deposit_amount, client.lasting]]
         myFile = open('C:\\Users\\AAZhirova\\first_project\\2.csv', 'w')
